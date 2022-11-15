@@ -4,6 +4,18 @@ This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
 If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
+## To test this out, do the following:
+
+Go to http://localhost:8080/coffee/2/availability in your browser. You should see a number being returned.
+
+Hit refresh, this second request should again be successful and return a number.
+
+Refresh two more times. Both times you should see text "RuntimeException: Service failed.", which is the exception thrown by CoffeeRepositoryService#getAvailability().
+
+Refresh a couple more times. Unless you waited too long, you should again see exception, but this time it’s "CircuitBreakerOpenException: getAvailability". This exception indicates that the circuit breaker opened and the CoffeeRepositoryService#getAvailability() method is not being called anymore.
+
+Give it 5 seconds during which circuit breaker should close, and you should be able to make two successful requests again.
+
 ## Running the application in dev mode
 
 You can run your application in dev mode that enables live coding using:
